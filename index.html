@@ -1,23 +1,841 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": "TV인터넷결합상품 비교견적 사이트",
+            "url": "https://www.yourdomain.com/",
+            "description": "2026년 최신 TV인터넷결합상품을 주요 통신사별로 비교하고 합리적인 견적을 받으세요. 최대 현금지원, 사은품 혜택, 요금제 평균, 가입 순위 등 전문적인 정보를 제공합니다.",
+            "publisher": {
+                "@type": "Organization",
+                "name": "TV인터넷가입전문센터",
+                "email": "contact@yourdomain.com"
+            },
+            "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://www.yourdomain.com/?q={search_term_string}",
+                "query-input": "required name=search_term_string"
+            }
+        }
+        </script>
+
+        <!-- Preconnect to external resources -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+        <!-- Custom CSS Styles -->
+        <style>
+            /* Base Styling and Reset */
+            body { font-family: 'Noto Sans KR', sans-serif; margin: 0; padding: 0; color: #333; line-height: 1.6; background-color: #f7f9fc; }
+            h1, h2, h3, h4 { margin-top: 0; font-weight: 700; }
+            a { text-decoration: none; color: inherit; }
+            ul, ol { list-style: none; padding-left: 0; }
+            img { max-width: 100%; height: auto; display: block; }
+            .soundonly { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+
+            /* Color Palette for Soft, Professional Look */
+            :root {
+                --primary-color: #004d99; /* Deep Blue */
+                --secondary-color: #00a0e9; /* Teal/Sky Blue */
+                --accent-color: #ff7f00; /* Orange Accent */
+                --text-color: #333333;
+                --light-bg: #ffffff;
+                --dark-bg: #f7f9fc;
+                --border-color: #e0e0e0;
+            }
+
+            /* Layout and Typography */
+            .container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+            .header { background-color: var(--primary-color); padding: 1rem 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+            .navbar-brand img { filter: brightness(0) invert(1); } /* Make logo white for dark header */
+            .banner-area-5 { background: linear-gradient(to right, #eaf4ff, #ffffff); padding: 60px 0; }
+            .banner-content h2 { font-size: 3rem; font-weight: 900; line-height: 1.3; color: var(--text-color); }
+            .banner-content span.highlight { color: var(--accent-color); }
+            .section-title h2 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 1.5rem; }
+            .feature-area-3 { padding: 80px 0; background-color: var(--light-bg); }
+            .mainFormWrap { background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+            .mainTextCell { font-size: 2rem; color: var(--primary-color); text-align: center; font-weight: 700; margin-bottom: 1rem; }
+            .subTextCell { font-size: 1.2rem; text-align: center; color: var(--text-color); margin-bottom: 2rem; }
+            .inputWrap input, .inputWrap select { border-radius: 8px; border: 1px solid var(--border-color); padding: 0.8rem 1rem; font-size: 1rem; width: 100%; box-sizing: border-box; }
+            .btnCompare { background-color: var(--secondary-color); color: white; border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: background-color 0.3s ease; }
+            .btnCompare:hover { background-color: var(--primary-color); }
+            .about-area-2 { background-color: #f7f9fc; padding: 80px 0; }
+            .info-card { background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: transform 0.3s ease; }
+            .info-card:hover { transform: translateY(-5px); }
+            .info-card h4 { color: var(--primary-color); font-size: 1.5rem; margin-bottom: 1rem; }
+            .info-card p { color: #555; font-size: 1rem; }
+            .content-section { padding: 60px 0; background-color: #ffffff; border-top: 1px solid var(--border-color); }
+            .content-section h2 { border-left: 5px solid var(--secondary-color); padding-left: 1rem; margin-bottom: 2rem; font-size: 2rem; }
+            .content-section table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 0.95rem; }
+            .content-section th, .content-section td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+            .content-section th { background-color: #f0f0f0; font-weight: 700; }
+            .content-section .cta-button { text-align: center; margin-top: 40px; }
+            .cta-button a { display: inline-block; background-color: var(--accent-color); color: white; padding: 1rem 3rem; border-radius: 30px; font-size: 1.2rem; font-weight: 700; }
+
+            /* New Styles for TV Internet Content */
+            .provider-logo-section { text-align: center; padding: 40px 0; }
+            .provider-logo-section img { margin: 0 20px; height: 50px; display: inline-block; }
+            .content-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+            .content-grid article { background-color: #fff; border-radius: 10px; padding: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+            .faq-section { background-color: #f7f9fc; padding: 60px 0; }
+            .faq-section h3 { color: var(--primary-color); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 20px; }
+            .faq-section ul li { margin-bottom: 15px; }
+
+            /* Mobile Adjustments */
+            @media (max-width: 768px) {
+                .banner-content h2 { font-size: 2.5rem; }
+                .section-title h2 { font-size: 2rem; }
+                .mainTextCell { font-size: 1.8rem; }
+                .inputWrap input, .inputWrap select { padding: 0.6rem; font-size: 0.9rem; }
+                .btnCompare { font-size: 1rem; padding: 0.8rem 1.5rem; }
+            }
+        </style>
+        <!-- Pexels Image Source (Hypothetical image placeholder based on search) -->
+        <!-- Image from Pexels: https://www.pexels.com/search/tv%20internet%20bundle/ -->
+    </head>
+    <body>
+
+        <header class="header">
+            <div class="header-menu header-menu-4">
+                <nav class="navbar navbar-expand-lg ">
+                    <div class="container d-flex justify-content-between align-items-center">
+                        <a class="navbar-brand py-3" href="/">
+                            <img class="main" src="/theme/barit/img/logo.webp" alt="로고" width="283" height="45">
+                        </a>
+                        <a href="#mainForm" title="견적 신청 폼으로 이동" class="quick_link d-md-none d-block">
+                            <img src="/theme/barit/img/motop02.webp" width="150" height="28" alt="혜택 확인하기">
+                        </a>
+                        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_toggle">
+                                <span class="hamburger"><span></span><span></span><span></span></span>
+                                <span class="hamburger-cross"><span></span><span></span></span>
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse right-nav" id="navbarSupportedContent">
+                            <ul class="navbar-nav menu ms-auto d-block d-md-none">
+                                <li class="nav-item submenu"><a href="/policy/terms.php" class="nav-link dropdown-toggle" role="button" title="개인정보 처리방침">개인정보 처리방침</a></li>
+                                <li class="nav-item submenu"><a href="/bbs/board.php?bo_table=adlink" class="nav-link dropdown-toggle" role="button" title="게시판">게시판</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <!-- Banner Section: TV Internet Bundle Focus -->
+            <section class="banner-area-5">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center pt-80 pb-60">
+                        <div class="col-lg-12">
+                            <div class="banner-content wow fadeInRight" data-wow-delay="0.1s">
+                                <div class="row text-start flex-wrap">
+                                    <div class="col-12 col-lg-8">
+                                        <h2 class="w-100 main-ts title_font text-60 mt-70">
+                                            <span class="highlight">현명한 통신비 절약</span>의 시작,<br>
+                                            <span class="highlight">최대 현금지원</span> TV인터넷결합상품을 찾아드립니다.
+                                        </h2>
+                                        <p class="mt-3 text-20 text-dark">
+                                            SKT, KT, LGU+ 등 주요 통신사의 TV인터넷결합상품을 한눈에 비교하고<br>
+                                            나에게 맞는 맞춤형 할인 혜택과 사은품까지 확인하세요.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mx-auto text-center text-sm-start mt-4">
+                            <!-- Image representing TV Internet bundles or a family enjoying services -->
+                            <div class="hero-img wow">
+                                <img class="person-img" src="/theme/barit/img/main_internet_bundle.webp" width="734" height="410" alt="TV 인터넷 결합상품 이미지">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Main Form Section (S01) and Keyword-rich description -->
+            <section class="pt-80 pb-100 feature-area-3">
+                <div class="container">
+                    <div class="section-title text-center text-sm-start pb-1 mb-lg-5 mb-3">
+                        <h2 class="wow fadeInUp text-50 ls-2">
+                            TV인터넷결합상품 가입상담 누적 신청 <span class="highlight">15,883</span>명
+                        </h2>
+                        <p class="wow fadeInUp text-18 text-muted mt-3">
+                            2026년 최신 데이터 기준, 통신사별 요금제와 할인 혜택은 복잡하게 얽혀있습니다.<br>
+                            꼼꼼한 <span class="secondary-color">비교</span> 없이 가입하면 예상 비용보다 훨씬 많은 지출이 발생할 수 있습니다.<br>
+                            지금 바로 <span class="primary-color">TV인터넷결합상품 전문업체</span>를 통해 <span class="highlight">최대 현금지원 사은품 혜택</span>을 확인하세요.
+                        </p>
+                    </div>
+
+                    <div id="mainForm" class="mainFormWrap">
+                        <div class="mainFormArea row">
+                            <div class="mainTextCell title_font text-26 mtext-26">
+                                TV인터넷 <span class="highlight">결합상품</span>,<br>
+                                <span class="primary-color">제대로</span> 알아보자!
+                            </div>
+                            <div class="subTextCell text-center px-5 ls-1 fw-700">
+                                <span class="mtext-24">
+                                    <span class="primary-color">TV인터넷결합상품 가입</span>을 위한 <span class="secondary-color">상담 신청 정보</span>를 입력해주세요.
+                                </span>
+                                <div class="inputWrap w-100 mt-3">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label for="frmS01Name" class="soundonly">이름</label>
+                                            <input type="text" id="frmS01Name" class="form-control" name="frmS01Name" placeholder="이름">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inputWrap">
+                                    <div class="row g-0">
+                                        <div class="col-3">
+                                            <label for="first-number2" class="soundonly">핸드폰 앞자리</label>
+                                            <select aria-label="first-number2" class="phoneHeadSelector phoneHeadSelector_m form-control mselect">
+                                                <option value="010" selected="">010</option>
+                                                <option value="011">011</option>
+                                                <option value="016">016</option>
+                                                <option value="017">017</option>
+                                                <option value="018">018</option>
+                                                <option value="019">019</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-9">
+                                            <label for="frmS01Mphone" class="soundonly">전화번호</label>
+                                            <input type="text" id="frmS01Mphone" name="frmS01Mphone" class="phoneInput form-control" placeholder="12345678">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="inputInfoTextCell text-14">* 휴대폰 번호는 (-) 없이 숫자만 입력해주세요!</div>
+                                <div class="inputInfoTextCell mt-2 text-14 showPolicyWin">
+                                    <input class="checkMain" id="privacyAgree3" name="check" type="checkbox" onclick="return false;">
+                                    <label for="privacyAgree3" data-bs-toggle="modal" data-bs-target="#privacyPopup">개인정보 수집·이용 및 제공 동의</label>
+                                    <span class="btnViewPolicy btnViewPolicy_m text-12" data-bs-toggle="modal" data-bs-target="#privacyPopup">보기</span>
+                                </div>
+                                <button type="button" id="btnSubmitS01" class="w-auto text-16 py-2 px-5 mt-3 d-block btnCompare mbt">내 TV인터넷결합상품 혜택 비교하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informational Content Section: Understanding TV Internet Bundles -->
+            <section class="content-section">
+                <div class="container">
+                    <h2 class="section-heading">TV인터넷결합상품, 왜 필요할까요? 핵심 차이점 분석</h2>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <article>
+                                <h3 class="fw-bold text-dark mb-3">결합상품의 장점: 통신비 절약과 사은품 혜택</h3>
+                                <p>TV인터넷결합상품은 통신사들이 고객 유치를 위해 제공하는 핵심 <span class="primary-color">할인 혜택</span>입니다. <span class="secondary-color">결합상품 장점</span>은 인터넷과 TV를 개별로 가입할 때보다 <span class="highlight">요금제 평균</span>이 훨씬 저렴하다는 점입니다. 특히 <span class="accent-color">현금지원</span>이나 <span class="accent-color">사은품</span> 같은 <span class="primary-color">신규 가입 혜택</span>이 풍부하여, 많은 소비자들이 <span class="primary-color">인터넷가입 전문업체</span>를 통해 <span class="secondary-color">결합상품 견적</span>을 받고 있습니다.</p>
+                                <p>2026년 현재 통신사들은 모바일 요금제까지 포함한 <span class="secondary-color">TV인터넷결합상품</span>을 주력으로 판매하고 있습니다. 온 가족이 같은 통신사를 이용할 경우 <span class="primary-color">가족 결합 할인</span>을 통해 통신비 <span class="accent-color">절약</span> 효과가 극대화됩니다. <span class="highlight">TV인터넷결합상품 비교</span> 시 단순히 월 요금만 볼 것이 아니라, 총 <span class="primary-color">할인 비용</span>과 <span class="accent-color">현금지원 금액</span>을 모두 고려해야 합니다.</p>
+                            </article>
+                        </div>
+                        <div class="col-lg-6">
+                            <article>
+                                <h3 class="fw-bold text-dark mb-3">2026년 TV인터넷 시장 동향 및 예측</h3>
+                                <p>2026년에는 <span class="secondary-color">TV인터넷결합상품</span> 시장이 더욱 치열해지면서 <span class="primary-color">현금지원 금액</span>이 상향 평준화될 것으로 예상됩니다. 특히 <span class="primary-color">네이버, 구글</span> 등 검색 플랫폼에서 <span class="highlight">TV인터넷결합상품</span>을 검색하는 사용자가 늘어나면서 <span class="primary-color">인터넷가입 순위</span>가 높은 업체들은 <span class="accent-color">최저가 견적</span>을 제시하며 경쟁하고 있습니다.</p>
+                                <p>또한 <span class="secondary-color">인터넷가입</span> 시 <span class="primary-color">사은품</span>으로 제공되는 상품권이나 가전제품의 종류도 다양해지고 있습니다. <span class="highlight">TV인터넷결합상품 내돈내산 후기</span>를 보면, <span class="primary-color">현금지원</span> 금액을 최대로 받기 위해서는 <span class="primary-color">전문업체</span>를 통해 여러 통신사의 <span class="secondary-color">장단점</span>을 비교해보는 것이 중요하다고 언급됩니다. <span class="primary-color">TV인터넷결합상품 추천</span>을 받을 때도 <span class="highlight">요금제 평균</span>과 <span class="primary-color">할인 혜택</span>을 꼼꼼히 따져봐야 합니다.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informational Content Section: Comparison Table and Discount Features -->
+            <section class="customize-card-area bg_disable">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="section-title text-center text-sm-start mb-4">
+                                <h2 class="wow fadeInUp main-ts title_font">통신사별 <span class="t_deco">TV인터넷결합상품</span> <span class="primary-color">할인</span> <span class="accent-color">혜택</span> 비교 분석</h2>
+                                <h3 class="text-30 ls-1 fw-600"><span class="secondary-color">최대 현금지원</span> 적용된 요금제를 확인하세요.</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Discount Icons Section (adapted for TV Internet) -->
+                    <div class="row align-items-center justify-content-center mt-5">
+                        <div class="col-4 col-md">
+                            <div class="feature-card-widget-r wow fadeInUp text-center mb-3">
+                                <img src="/theme/barit/img/d01_family.webp" width="184" height="185" alt="가족결합할인">
+                                <p class="text-26 fw-700 mt-2">가족결합할인</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md">
+                            <div class="feature-card-widget-r wow fadeInUp text-center mb-3">
+                                <img src="/theme/barit/img/d02_new.webp" width="184" height="185" alt="신규가입혜택">
+                                <p class="text-26 fw-700 mt-2">신규가입혜택</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md">
+                            <div class="feature-card-widget-r wow fadeInUp text-center mb-3">
+                                <img src="/theme/barit/img/d03_cash.webp" width="184" height="185" alt="현금지원">
+                                <p class="text-26 fw-700 mt-2">현금지원</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md">
+                            <div class="feature-card-widget-r wow fadeInUp text-center mb-3">
+                                <img src="/theme/barit/img/d04_voucher.webp" width="184" height="185" alt="상품권증정">
+                                <p class="text-26 fw-700 mt-2">상품권증정</p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-md">
+                            <div class="feature-card-widget-r wow fadeInUp text-center mb-3">
+                                <img src="/theme/barit/img/d05_mobile.webp" width="184" height="185" alt="모바일결합할인">
+                                <p class="text-26 fw-700 mt-2">모바일결합할인</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5">
+                        <div class="col-12 text-center">
+                            <h3 class="text-center highlight text-24">*통신사 및 가입 조건에 따라 혜택이 상이할 수 있습니다.</h3>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5 align-items-center justify-content-center">
+                        <div class="col-12 text-center cta-button">
+                            <a href="#mainForm" class="btn-primary">나에게 맞는 TV인터넷결합상품 견적 확인하기</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informational Content Section: Deep Dive into Calculation and Keywords -->
+            <section class="content-section">
+                <div class="container">
+                    <h2 class="section-heading">TV인터넷결합상품 가입 절차와 <span class="primary-color">현금지원</span> 받는 방법</h2>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <article>
+                                <h3 class="fw-bold text-dark mb-3">통신사별 TV인터넷결합상품 요금제 <span class="highlight">평균</span> 및 <span class="highlight">예상 비용</span> 분석</h3>
+                                <p><span class="primary-color">TV인터넷결합상품</span>은 통신 3사(SKT, KT, LGU+)의 요금제에 따라 <span class="primary-color">가격</span>과 <span class="secondary-color">할인 혜택</span>이 크게 달라집니다. <span class="highlight">요금제 평균</span>은 일반적으로 인터넷 속도(100M, 500M, 1G)와 TV 채널 수에 따라 결정됩니다. <span class="primary-color">TV인터넷결합상품 가입</span> 시 월 <span class="primary-color">비용</span>을 줄이는 가장 좋은 방법은 <span class="secondary-color">모바일 결합</span>입니다. SKT의 경우 'T끼리 온가족 할인', KT의 경우 '총액 결합 할인', LGU+의 경우 '한방에 YO' 등 각 통신사별 <span class="primary-color">할인 상품</span>을 확인해야 합니다.</p>
+                                <p>예를 들어, 4인 가족이 SKT 모바일을 이용할 경우, <span class="secondary-color">TV인터넷결합상품</span> 가입 시 월 <span class="primary-color">할인 금액</span>이 상당합니다. <span class="primary-color">TV인터넷결합상품 견적</span>을 정확히 받으려면, 본인의 휴대폰 통신사와 <span class="secondary-color">가족 구성원</span>의 통신사 정보를 함께 고려해야 합니다.</p>
+
+                                <h4 class="fw-bold text-dark mt-4">2026년 <span class="primary-color">현금지원</span> 및 <span class="primary-color">사은품</span> <span class="secondary-color">비교</span> (신규 가입 기준)</h4>
+                                <ul>
+                                    <li><strong>현금지원 금액:</strong> 통신사 정책과 <span class="primary-color">가입 전문 업체</span>의 규모에 따라 상이. <span class="highlight">최대 금액</span>을 받으려면 여러 업체의 견적을 <span class="primary-color">비교</span>해야 합니다.</li>
+                                    <li><strong>사은품 제공:</strong> 가전제품, 상품권 등 다양한 형태로 제공. <span class="secondary-color">TV인터넷결합상품 싼곳</span>은 주로 <span class="accent-color">현금지원</span>을 최대로 해주는 업체입니다.</li>
+                                    <li><strong>신규 가입 혜택:</strong> <span class="primary-color">신규 가입</span> 시 <span class="primary-color">가입 비용</span> 절감과 함께 <span class="secondary-color">사은품</span>을 받는 것이 핵심입니다.</li>
+                                    <li><strong>AI 추천 시스템:</strong> 2026년에는 <span class="primary-color">AI</span> 에이전트(예: <span class="primary-color">Gemini, ChatGPT</span>)를 활용하여 개인에게 최적화된 <span class="primary-color">TV인터넷결합상품 추천</span>을 받을 수 있습니다.</li>
+                                </ul>
+
+                                <h3 class="fw-bold text-dark mt-5">지역별 <span class="primary-color">TV인터넷결합상품</span> 가입 <span class="primary-color">전문</span>업체 <span class="primary-color">순위</span> 및 <span class="highlight">추천</span> 기준</h3>
+                                <p>단순히 <span class="primary-color">TV인터넷결합상품 추천</span>을 받기보다는, <span class="primary-color">TV인터넷 가입 순위</span>가 높은 업체를 대상으로 <span class="highlight">비교</span>를 하는 것이 중요합니다. <span class="secondary-color">TV인터넷결합상품 장단점</span>을 비교해보면, 대리점 방문 가입은 편리하지만 <span class="secondary-color">현금지원</span> 금액이 적을 수 있습니다. 반면, 온라인 <span class="primary-color">인터넷가입 전문업체</span>는 <span class="primary-color">가입 비용</span> 절감과 <span class="accent-color">현금지원</span>을 극대화할 수 있습니다.</p>
+                                <p>저희 사이트에서는 <span class="primary-color">TV인터넷결합상품 비교</span>를 통해 고객님에게 맞는 최적의 통신사를 찾아드립니다. <span class="primary-color">TV인터넷 내돈내산 후기</span>를 바탕으로 실질적인 <span class="primary-color">TV인터넷결합상품 장점 단점</span>을 분석하고, <span class="primary-color">지역별 (서울, 경기, 인천, 부산, 대구, 대전, 광주, 울산, 세종, 강릉, 원주, 춘천, 청주, 충주, 천안, 아산, 공주, 논산, 익산, 군산, 전주, 목포, 여수, 순천, 구미, 포항, 경주, 김해, 창원, 제주 등)</span> 가입 조건을 종합하여 <span class="highlight">요금제 견적</span>을 제공합니다.</p>
+
+                                <h4 class="fw-bold text-dark mt-4">신규 가입 시 유의사항: '함께 많이 찾는' 정보</h4>
+                                <p><span class="primary-color">TV인터넷결합상품</span>을 가입할 때는 몇 가지 유의사항이 있습니다. 특히 <span class="secondary-color">사은품</span> 지급 조건과 설치 가능 지역을 확인해야 합니다. <span class="primary-color">인터넷가입 전문업체</span>마다 제공하는 <span class="secondary-color">현금지원 혜택</span>의 종류와 <span class="primary-color">지원금</span> 규모가 다릅니다. 예를 들어, <span class="primary-color">디시</span>나 기타 커뮤니티에서 <span class="primary-color">TV인터넷결합상품 싼곳</span> 정보를 찾아볼 수도 있지만, 공신력 있는 <span class="secondary-color">전문 업체</span>를 통해 진행하는 것이 안전합니다. <span class="highlight">TV인터넷결합상품 저렴한곳</span>을 찾으려면 이 모든 <span class="primary-color">할인 혜택</span>을 빠짐없이 확인해야 합니다.</p>
+
+                                <h3 class="fw-bold text-dark mt-5">TV인터넷결합상품 가입, <span class="primary-color">현금지원</span> <span class="secondary-color">가격</span> 분석</h3>
+                                <p>많은 소비자들이 <span class="primary-color">TV인터넷결합상품</span> 가입 시 <span class="secondary-color">현금지원 금액</span>이 가장 높았던 <span class="primary-color">내돈내산 후기</span>를 찾습니다. 통신사 본사 정책과 <span class="primary-color">전문업체</span> 정책에 따라 <span class="primary-color">현금지원 금액</span>은 달라질 수 있습니다. <span class="primary-color">TV인터넷결합상품 견적</span>을 받을 때, <span class="primary-color">가격</span>과 함께 <span class="secondary-color">사은품</span>의 가치를 종합적으로 고려하는 것이 중요합니다.</p>
+                                <p><span class="secondary-color">TV인터넷결합상품 비교 추천</span>을 통해 <span class="primary-color">현금지원</span> 혜택을 극대화하고, <span class="secondary-color">요금제 평균</span>보다 낮은 <span class="primary-color">비용</span>으로 <span class="highlight">TV인터넷결합상품</span>을 이용할 수 있습니다. <span class="primary-color">인터넷가입 순위</span>가 높은 업체일수록 <span class="primary-color">현금지원</span>을 투명하게 공개하고 있습니다.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informational Content Section: Data Visualization and Keyword Density -->
+            <section class="content-section">
+                <div class="container">
+                    <h2 class="section-heading">TV인터넷결합상품 <span class="secondary-color">가입</span> <span class="accent-color">혜택</span> 비교 분석표</h2>
+                    <p>TV인터넷결합상품 가입 시 가장 중요한 것은 <span class="primary-color">현금지원</span> 및 <span class="secondary-color">사은품</span> 혜택입니다. 통신사별로 제공하는 <span class="secondary-color">할인 혜택</span>과 <span class="accent-color">지원금</span>이 다르므로 꼼꼼한 비교가 필요합니다. 다음은 2026년 기준 주요 통신사의 <span class="primary-color">TV인터넷결합상품 할인 혜택</span>을 비교한 표입니다.</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>통신사</th>
+                                    <th>대표 결합상품</th>
+                                    <th>주요 <span class="secondary-color">할인 혜택</span></th>
+                                    <th><span class="highlight">현금지원</span> (신규 가입 기준 예상)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span class="highlight">SKT</span></td>
+                                    <td>T 온가족 할인, 온가족 프리</td>
+                                    <td>모바일 요금제 합산 할인, <span class="primary-color">유무선 결합</span> 할인</td>
+                                    <td>최대 40만원대 <span class="accent-color">현금지원</span> 및 상품권</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="highlight">KT</span></td>
+                                    <td>총액 결합 할인, 프리미엄 가족결합</td>
+                                    <td>가족 모바일 요금제 <span class="primary-color">할인</span>, 인터넷 요금 <span class="secondary-color">할인</span></td>
+                                    <td>최대 40만원대 <span class="accent-color">현금지원</span> 및 상품권</td>
+                                </tr>
+                                <tr>
+                                    <td><span class="highlight">LGU+</span></td>
+                                    <td>참 쉬운 가족 결합, 한방에 YO</td>
+                                    <td>모바일 요금제 별도 <span class="primary-color">할인</span>, 기가 인터넷 <span class="secondary-color">할인</span></td>
+                                    <td>최대 40만원대 <span class="accent-color">현금지원</span> 및 상품권</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="mt-4">이러한 <span class="secondary-color">할인 혜택</span>을 통해 <span class="primary-color">TV인터넷결합상품</span>의 <span class="primary-color">예상 비용</span>을 크게 줄일 수 있습니다. <span class="secondary-color">신규 가입</span> 전에 각 통신사의 <span class="highlight">현금지원</span> 조건을 꼼꼼히 확인하여 <span class="primary-color">TV인터넷결합상품 평균</span>보다 낮은 <span class="primary-color">가격</span>을 확보하는 것이 중요합니다.</p>
+
+                    <h3 class="fw-bold text-dark mt-5"><span class="secondary-color">TV인터넷결합상품</span> <span class="primary-color">가입</span> <span class="primary-color">장단점</span> 비교: <span class="primary-color">내돈내산 후기</span> 기반 분석</h3>
+                    <div class="content-grid">
+                        <article>
+                            <h4 class="fw-bold text-dark mb-2">장점: <span class="secondary-color">현금지원</span>과 통신비 절약</h4>
+                            <p>가장 큰 <span class="primary-color">장점</span>은 <span class="highlight">현금지원</span>과 <span class="primary-color">사은품</span>입니다. <span class="secondary-color">TV인터넷결합상품</span>을 <span class="primary-color">신규 가입</span>하면, <span class="primary-color">전문업체</span>를 통해 상당한 <span class="accent-color">지원금</span>을 받을 수 있습니다. 또한 모바일 요금제 <span class="primary-color">할인</span>을 통해 월 통신 <span class="primary-color">비용</span>을 절감할 수 있어 <span class="secondary-color">TV인터넷결합상품 싼곳</span>을 찾는 소비자에게 유리합니다.</p>
+                        </article>
+                        <article>
+                            <h4 class="fw-bold text-dark mb-2">단점: 약정 기간과 위약금</h4>
+                            <p><span class="primary-color">단점</span>으로는 긴 약정 기간(보통 3년)과 중도 해지 시 발생하는 위약금입니다. <span class="secondary-color">TV인터넷결합상품</span>을 <span class="primary-color">가입</span>할 때는 약정 기간을 명확히 확인해야 합니다. <span class="primary-color">TV인터넷결합상품 내돈내산 후기</span>를 보면 위약금 문제로 인해 통신사 변경을 망설이는 경우가 많습니다. <span class="primary-color">인터넷가입 순위</span>가 높은 업체일수록 약정 조건을 투명하게 설명합니다.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informational Content Section: Trust Building and External Links -->
+            <section class="content-section">
+                <div class="container">
+                    <h2 class="section-heading">공신력 있는 정보 출처를 통한 신뢰성 확보</h2>
+                    <p>TV인터넷결합상품에 대한 정확한 정보는 공인된 기관을 통해 확인하는 것이 중요합니다. 저희 사이트는 <span class="secondary-color">TV인터넷결합상품 견적</span> 산출 시 객관적인 데이터를 기반으로 합니다. 다음은 <span class="primary-color">인터넷가입</span> 관련 정보를 얻을 수 있는 신뢰할 수 있는 외부 링크입니다.</p>
+                    <ul>
+                        <li><a href="https://www.msit.go.kr/" target="_blank" class="text-secondary fw-bold">과학기술정보통신부</a>: 통신 관련 정책, 소비자 보호 규정 제공.</li>
+                        <li><a href="https://www.kcc.go.kr/" target="_blank" class="text-secondary fw-bold">방송통신위원회</a>: 통신 서비스 이용자 보호, 방송통신 정책 정보 제공.</li>
+                        <li><a href="https://www.kisa.or.kr/" target="_blank" class="text-secondary fw-bold">한국인터넷진흥원 (KISA)</a>: 인터넷 서비스 품질 및 보안 정보 제공.</li>
+                        <li><a href="https://www.consumer.go.kr/" target="_blank" class="text-secondary fw-bold">한국소비자원</a>: 통신 서비스 관련 소비자 피해 구제 및 정보 제공.</li>
+                        <li><a href="https://namu.wiki/w/%EC%9D%B8%ED%84%B0%EB%84%B7%20%EC%A7%80%EC%9B%90%EA%B8%88" target="_blank" class="text-secondary fw-bold">나무위키 인터넷 지원금</a>: 인터넷 가입 시 지원금 및 시장 현황 설명.</li>
+                    </ul>
+                    <p class="mt-4">이러한 정보를 바탕으로 <span class="primary-color">TV인터넷결합상품 비교</span>를 진행하여 <span class="primary-color">인터넷가입</span>을 결정하시면, <span class="secondary-color">TV인터넷결합상품 장단점</span>을 명확히 파악하고 <span class="primary-color">저렴한곳</span>을 선택할 수 있습니다. <span class="highlight">현금지원 금액</span>을 찾아볼 때도 이러한 기본 지식을 바탕으로 분석하는 것이 현명합니다.</p>
+                </div>
+            </section>
+
+            <!-- Form Section (S02) - Strategically placed for conversion -->
+            <section class="form_bg pt-100 pb-100">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center">
+                        <div class="col-md-10 col-12">
+                            <div class="mainFormArea text-center">
+                                <div class="mainTextCell title_font main-ts">
+                                    <span class="secondary-color">SKT, KT, LGU+</span> 통신사별 <span class="primary-color">현금지원</span> 비교
+                                </div>
+                                <div class="text-center text-16">* 오프라인 대비 <span class="primary-color">최대 현금지원</span> 혜택 가능</div>
+                                <div class="subTextCell ls-5 fw-900 text-32 mt-4">
+                                    <span class="secondary-color">TV인터넷결합상품 상담</span>을 위해 정보를 입력해주세요.
+                                </div>
+                                <div class="row align-items-center justify-content-center g-0 mt-5">
+                                    <div class="col-md-auto mx-2">
+                                        <div class="inputWrap"><input type="text" class="form_control" id="frmS02Name" name="frmS02Name" placeholder="이름"></div>
+                                        <div class="inputInfoTextCell fw-700 ls-1 showPolicyWin text-center mt-2">
+                                            <input id="privacyAgree2" name="check" class="checkMain" type="checkbox" onclick="return false;">
+                                            <label for="privacyAgree2" data-bs-toggle="modal" data-bs-target="#privacyPopup" class="fw-600">개인정보 수집·이용 및 제공 동의</label>
+                                            <span class="btnViewPolicy" data-bs-toggle="modal" data-bs-target="#privacyPopup">보기</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-auto">
+                                        <div class="inputWrap">
+                                            <label for="first-number" class="soundonly">휴대폰 앞자리</label>
+                                            <select aria-label="first-number" class="phoneHeadSelector">
+                                                <option value="010" selected="">010</option>
+                                                <option value="011">011</option>
+                                                <option value="016">016</option>
+                                                <option value="017">017</option>
+                                                <option value="018">018</option>
+                                                <option value="019">019</option>
+                                            </select>
+                                            <input type="text" id="frmS02Mphone" name="frmS02Mphone" class="phoneInput" placeholder="12345678">
+                                        </div>
+                                        <div class="inputInfoTextCell fw-600 ls-1 text-center mt-2">* 휴대폰 번호는 (-) 없이 숫자만 입력해주세요!</div>
+                                    </div>
+                                </div>
+                                <button type="button" id="btnSubmitS02" class="btnCompare mt-5">내 TV인터넷결합상품 혜택 확인하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Informational Content Section: Long-form Content for SEO -->
+            <section class="content-section">
+                <div class="container">
+                    <h2 class="section-heading">TV인터넷결합상품 <span class="primary-color">가입</span> 심화 가이드: 2026년 최신 정보</h2>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <article>
+                                <h3 class="fw-bold text-dark mb-3">통신사별 <span class="primary-color">TV인터넷결합상품</span> <span class="secondary-color">장점</span>과 <span class="primary-color">단점</span> 비교 분석</h3>
+                                <p><span class="highlight">TV인터넷결합상품</span>은 <span class="primary-color">현금지원</span> 금액과 월 <span class="primary-color">요금제 평균</span>이 통신사별로 다릅니다. SKT, KT, LGU+ 모두 <span class="primary-color">결합상품</span>을 주력으로 판매하고 있지만, 세부적인 <span class="secondary-color">할인 혜택</span>과 <span class="primary-color">사은품</span> <span class="accent-color">가격</span>은 차이가 있습니다. <span class="primary-color">TV인터넷결합상품 비교</span>를 통해 나에게 맞는 통신사를 선택하는 것이 중요합니다.</p>
+                                <p><strong>SKT:</strong> 모바일 점유율 1위인 SKT는 가족 중 SKT 휴대폰 사용자가 많을 경우 <span class="secondary-color">할인율</span>이 높습니다. 'T끼리 온가족 할인'은 <span class="primary-color">결합상품</span> <span class="primary-color">비용</span> 절감에 매우 유리하며, <span class="accent-color">현금지원</span> 혜택도 풍부합니다. <span class="primary-color">TV인터넷결합상품 추천</span>을 받을 때 모바일 결합을 고려하는 소비자에게 적합합니다.</p>
+                                <p><strong>KT:</strong> 인터넷 품질과 서비스 만족도가 높은 KT는 '총액 결합 할인'을 통해 가족 구성원의 모바일 요금 합산액에 따라 <span class="secondary-color">할인 금액</span>을 제공합니다. <span class="primary-color">인터넷가입 순위</span>가 높은 KT는 특히 Btv의 콘텐츠가 강점입니다. <span class="primary-color">TV인터넷결합상품 견적</span>을 받을 때 <span class="secondary-color">TV</span> 품질을 중요하게 생각하는 소비자에게 추천됩니다.</p>
+                                <p><strong>LGU+:</strong> LGU+는 상대적으로 <span class="secondary-color">TV인터넷결합상품</span> <span class="primary-color">현금지원</span> 금액을 높게 책정하는 경향이 있습니다. U+tv의 VOD와 AI 서비스가 강점이며, <span class="primary-color">신규 가입</span>자에게 제공하는 <span class="secondary-color">사은품</span> 혜택이 매력적입니다. <span class="highlight">TV인터넷결합상품 저렴한곳</span>을 찾을 때 LGU+의 <span class="primary-color">요금제 평균</span>과 <span class="accent-color">현금지원</span>을 비교해볼 필요가 있습니다.</p>
+
+                                <h3 class="fw-bold text-dark mt-5"><span class="secondary-color">TV인터넷결합상품</span> 가입 절차와 <span class="primary-color">내돈내산 후기</span> 기반 유의사항</h3>
+                                <p><span class="highlight">TV인터넷결합상품 가입</span> 절차는 다음과 같습니다. 1) <span class="primary-color">전문업체</span>를 통한 <span class="secondary-color">TV인터넷결합상품 비교</span> 및 <span class="primary-color">견적</span> 확인 2) 설치 가능 지역 및 <span class="secondary-color">요금제</span> 선택 3) <span class="primary-color">현금지원</span> 및 <span class="secondary-color">사은품</span> 수령. <span class="secondary-color">TV인터넷결합상품 싼곳</span>을 찾을 때는 <span class="primary-color">인터넷가입 순위</span>가 높은 업체를 통해 안전하게 진행하는 것이 중요합니다.</p>
+                                <p>많은 <span class="highlight">TV인터넷 내돈내산 후기</span>를 보면, <span class="primary-color">현금지원</span> 금액이 <span class="primary-color">전문업체</span>마다 다르다고 강조합니다. <span class="primary-color">인터넷가입</span> 시 <span class="secondary-color">현금지원</span> 금액을 최대로 받기 위해서는 여러 업체의 <span class="primary-color">견적</span>을 받아 <span class="secondary-color">비교</span>하는 것이 필수적입니다. 또한, <span class="primary-color">가입</span> <span class="primary-color">순위</span>가 높은 업체일수록 <span class="secondary-color">사은품</span> 지급이 신속하고 정확합니다.</p>
+                                <p>특히 <span class="highlight">AI</span> 에이전트(예: <span class="primary-color">Gemini, ChatGPT</span>)를 활용하여 <span class="secondary-color">TV인터넷결합상품 추천</span>을 받을 수도 있습니다. <span class="primary-color">인터넷가입</span> 시 <span class="primary-color">할인 혜택</span>을 최대한 활용하여 <span class="secondary-color">TV인터넷결합상품 가격</span>을 절감하는 것이 중요합니다.</p>
+
+                                <h3 class="fw-bold text-dark mt-5">2026년 <span class="primary-color">TV인터넷결합상품</span> 예측: 변화하는 시장과 전망</h3>
+                                <p>2026년에는 <span class="primary-color">TV인터넷결합상품</span> 시장이 더욱 세분화될 것으로 예상됩니다. 특히 <span class="secondary-color">모바일 결합</span>을 통한 <span class="primary-color">할인 혜택</span>이 강화될 것입니다. <span class="primary-color">TV인터넷결합상품 계산</span> 시 <span class="secondary-color">요금제 평균</span>과 <span class="primary-color">가입 비용</span>이 더욱 중요하게 반영되어, <span class="accent-color">현금지원</span> 금액을 최대로 받으려는 소비자가 늘어날 것입니다. 또한 <span class="primary-color">네이버</span>나 <span class="primary-color">구글</span>에서 <span class="primary-color">TV인터넷결합상품</span>을 검색하여 <span class="secondary-color">비교</span>하는 소비자가 증가하면서 <span class="primary-color">온라인 전문업체</span>의 역할이 더욱 중요해질 것입니다.</p>
+                                <p>이러한 시장 변화 속에서 <span class="primary-color">TV인터넷결합상품 비교</span>의 중요성은 더욱 커집니다. <span class="primary-color">TV인터넷결합상품 장점 단점</span>을 명확히 이해하고, 2026년 최신 정보를 바탕으로 <span class="primary-color">TV인터넷결합상품 견적</span>을 확인해야 합니다. 저희 사이트는 실시간으로 <span class="highlight">TV인터넷결합상품</span> 정보를 업데이트하여 가장 합리적인 <span class="primary-color">요금제 가격</span>을 제시합니다.</p>
+
+                                <h3 class="fw-bold text-dark mt-5">TV인터넷결합상품 <span class="primary-color">가입</span> Q&A: 자주 묻는 질문</h3>
+                                <ul>
+                                    <li><strong>Q. <span class="primary-color">TV인터넷결합상품</span> <span class="secondary-color">현금지원</span>은 언제 받을 수 있나요?</strong><br>A. <span class="primary-color">TV인터넷결합상품</span> 설치 후 통신사 개통 확인이 완료되면 <span class="secondary-color">전문업체</span>를 통해 <span class="highlight">현금지원</span>이 지급됩니다. 보통 설치일로부터 1~2일 이내에 지급됩니다. <span class="primary-color">인터넷가입 순위</span>가 높은 업체일수록 지급이 빠릅니다.</li>
+                                    <li><strong>Q. <span class="primary-color">TV인터넷결합상품</span> <span class="primary-color">요금제 평균</span> <span class="primary-color">가격</span>은 얼마인가요?</strong><br>A. <span class="secondary-color">TV인터넷결합상품</span> <span class="primary-color">가격</span>은 인터넷 속도와 TV 채널 수, 그리고 모바일 결합 여부에 따라 천차만별입니다. <span class="primary-color">인터넷가입</span> 시 <span class="highlight">TV인터넷결합상품 견적</span>을 받아 <span class="primary-color">요금제 평균</span>을 확인하는 것이 가장 정확합니다.</li>
+                                    <li><strong>Q. <span class="primary-color">TV인터넷결합상품</span> <span class="primary-color">가입</span> 시 가장 중요한 <span class="primary-color">할인 혜택</span>은 무엇인가요?</strong><br>A. <span class="primary-color">가족 결합 할인</span>이 <span class="primary-color">TV인터넷결합상품</span>에서 가장 큰 <span class="secondary-color">할인 혜택</span>입니다. <span class="highlight">TV인터넷결합상품 저렴한곳</span>을 찾으려면 이 <span class="primary-color">할인 혜택</span>을 놓치지 말아야 합니다. 또한 <span class="secondary-color">현금지원</span> 금액도 중요한 <span class="primary-color">혜택</span>입니다.</li>
+                                </ul>
+                                <p class="mt-5 text-center"><span class="secondary-color">TV인터넷결합상품</span>, 전문가의 도움을 받아 현명하게 선택하세요. 지금 바로 <span class="primary-color">TV인터넷결합상품 비교 추천</span> 서비스를 이용해보세요.</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Modal for Privacy Policy (from original code) -->
+        <div class="modal fade" id="privacyPopup" tabindex="-1" aria-labelledby="privacyPopupLabel" aria-hidden="false">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                        <div class="contWin">
+                            <svg class="btnClosePopup" data-bs-dismiss="modal"   xmlns="http://www.w3.org/2000/svg"  width="30" height="30"   viewBox="0 0 30 30">
+                                <line x1="5" y1="5" x2="25" y2="25" stroke="black" stroke-width="2" />
+                                <line x1="25" y1="5" x2="5" y2="25" stroke="black" stroke-width="2" />
+                            </svg>
+                            <div class="popupTitle">개인(신용)정보 수집,이용,제공 동의서</div>
+                            <div class="scrollWrap">
+                                <div class="privacyInfoText">
+                                    상품 서비스 안내 등을 위하여 본인의 개인(신용)정보를 수집, 이용하거나 제 3자에게 제공하는 경우에는 개인정보보호법 제 15조 제 1항 제 1호, 제 17조 제 1항 제1호, 제 22조의 3항, 신용정보의 이용 및 보호에 관한 법률 제 15조 제 2항, 제 32조 1항, 제 33조 및 제 34조에 따라 본인의 동의가 필요합니다.
+                                </div>
+                                <div class="agreeAllCell"><span>개인(신용)정보의 처리에 대한 동의</span> <input class="checkAll" type="checkbox"> 전체동의</div>
+                                <div class="agreeContWrap">
+                                    <div class="agreeBox">
+                                        <div class="titleCell">1. 개인정보 수집 및 이용에 대한 동의<span>[필수]</span> <input class="agreeChk1" type="checkbox"></div>
+                                        <div class="agreeTextCell">
+                                            <span class="bold">□ 개인(신용)정보의 수집 · 이용에 관한 사항</span><br>
+                                            <span class="bold">① 개인(신용)정보의 수집ㆍ이용 목적</span><br>
+                                            : TV인터넷결합상품 비교견적 서비스 제공 및 만기 안내<br>
+                                            <span class="bold">② 개인(신용)정보의 수집 · 이용 항목</span><br>
+                                            : 이름, 연락처, 생년월일<br>
+                                            <span class="bold">③ 개인정보 보유 및 이용기간</span><br>
+                                            : 동의일로부터 5년간 보유<br>
+                                            ※ 개인정보 수집 이용에 동의하지 않을 수 있으나, 미동의 시 상담이 불가합니다.
+                                        </div>
+                                    </div>
+
+                                    <div class="agreeBox">
+                                        <div class="titleCell">2. 개인정보 처리위탁 동의<span>[필수]</span> <input class="agreeChk2" type="checkbox"></div>
+                                        <div class="agreeTextCell">
+                                            □ 이용자의 개인정보를 사전 동의없이 제 3자에게 제공하지 않습니다.<br>
+                                            □ 이용자의 사전 동의에 따라 해당 개인정보가 제 3자에게 제공되는 경우는 다음과 같습니다.<br>
+                                            <span class="bold">① 제공받는 자</span><br>
+                                            : <br>
+                                            <span class="bold">② 제공받는 자의 이용 목적</span><br>
+                                            : TV인터넷결합상품 비교견적 서비스 제공 및 만기 안내, 제3자의 상품 또는 서비스에 대한 개인 맞춤 광고 정보를 전송<br>
+                                            TV인터넷결합상품 비교견적, 인터넷가입<br>
+                                            ㈜TV인터넷가입전문센터 서비스 제공 및 만기 안내, 통신상품에 대한 안내<br>
+                                            <br>
+                                            <span class="bold">③ 제공항목</span><br>
+                                            : 이름, 연락처, 생년월일<br>
+                                            <span class="bold">④ 제공받는 자의 개인정보보유 및 이용기간</span><br>
+                                            : 동의일로부터 5년간 보유 <br>
+                                            ※ 개인정보 수집 이용에 동의하지 않을 수 있으나, 미동의 시 상담이 불가합니다.
+                                        </div>
+                                    </div>
+
+                                    <div class="agreeBox">
+                                        <div class="titleCell">
+                                            3. 마케팅 광고 활용 동의<span>[선택]</span> <input class="agreeChk3" type="checkbox">
+                                        </div>
+                                        <div class="agreeTextCell">
+                                            <span class="bold">① 제공받는 자</span><br>
+                                            <br>
+                                            <span class="bold">② 제공받는 자의 이용 목적</span><br>
+                                            상품 또는 서비스에 대한 개인 맞춤 광고 정보를 전송<br>
+                                            <span class="bold">③ 제공항목</span><br>
+                                            이름, 연락처, 생년월일 <br>
+                                            <span class="bold">④ 제공받는 자의 개인정보보유 및 이용기간</span><br>
+                                            동의일로부터 5년까지<br>
+                                            ※ 단, 관계법령에 의한 정보보유의 경우 해당 법령에서 명시한 기간 동안 보유<br>
+                                            상기 개인정보는 사용자에게 유상 제공 됩니다.
+                                        </div>
+                                    </div>
+                                </div><!--//agreeContWrap-->
+
+                                <div class="privacyInfoText">
+                                    □ 안내수단 : 문자메시지,이메일,전화 등<br>
+                                    □ 제3자 정보제공의 동의 철회<br>
+                                    본 동의서에 동의하신 고객 중 제 3자 정보제공을 철회하고 싶은 경우 이미 제 3자에게 제공된 개인정보라 하더라도, 언제든지 삭제를 요구할 수 있습니다.<br>
+                                    고객님께서는 동의를 거부하실 수 있으며, 동의 거부 시 다양한 상품 및 이벤트 안내 등의 서비스가 제한됩니다.
+                                </div>
+                            </div>
+                            <div class="btnConfirm" data-bs-dismiss="modal">확인</div>
+                        </div><!--//contWin-->
+                </div>
+            </div>
+        </div>
+
+        <!-- JS here -->
+        <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/preloader.js"></script>
+        <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/jquery.smoothscroll.min.js"></script>
+        <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/jquery.counterup.min.js"></script>
+        <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/jquery.nice-select.min.js"></script>
+        <script type="text/javascript" src="https://nawaracar.com/theme/barit/js/custom.js"></script>
+
+        <script>
+            // JS Logic (keep existing functionality for forms and data submission)
+
+            $(document).ready(function () {
+                // 팝업 열고닫기 - using jQuery show/hide
+                $(".btnViewPolicy, .showPolicyWin, label[for='agree_chk']").on("click", function (e) {
+                    e.preventDefault(); // Prevent default behavior
+                    $("#privacyPopup").show();
+                });
+
+                $("#privacyPopup .btnClosePopup, #privacyPopup .btnConfirm").on("click", function () {
+                    $("#privacyPopup").hide();
+                });
+
+                // 체크설정
+                $("#privacyPopup .checkAll").on("click", function () {
+                    if ($(this).prop("checked") == true) {
+                        $("#privacyPopup .agreeContWrap input[type=checkbox]").prop("checked", true);
+                    } else {
+                        $("#privacyPopup .agreeContWrap input[type=checkbox]").prop("checked", false);
+                    }
+
+                    setParentAgree();
+                });
+
+                $("#privacyPopup .agreeContWrap input[type=checkbox]").on("click", function () {
+                    var allChk = true;
+                    $("#privacyPopup .agreeContWrap input[type=checkbox]").each(function () {
+                        if ($(this).prop("checked") == false) {
+                            allChk = false;
+                        }
+                    });
+
+                    if (allChk == false) {
+                        $("#privacyPopup .checkAll").prop("checked", false);
+                    } else {
+                        $("#privacyPopup .checkAll").prop("checked", true);
+                    }
+
+                    setParentAgree();
+                });
+
+                // Allow checkbox to be checked
+                $(".checkMain").on("click", function (e) {
+                    e.stopPropagation(); // Prevent event from bubbling up
+                });
+            });
+
+            function setParentAgree() {
+                if ($(".agreeChk1").prop("checked") == true && $(".agreeChk2").prop("checked") == true) {
+                    $(".checkMain").prop("checked", true);
+                } else {
+                    $(".checkMain").prop("checked", false);
+                }
+            }
+
+            document.addEventListener('scroll', function () {
+                const scrollPosition = window.scrollY || window.pageYOffset;
+                const sideForms = document.querySelectorAll('.sideForm');
+
+                // Adjust scroll threshold for sideForm visibility based on new content length
+                const scrollThreshold = 100; // Keep side form visible near top
+
+                if (scrollPosition > scrollThreshold) {
+                    sideForms.forEach(function (sideForm) {
+                        sideForm.classList.remove('on');
+                    });
+                } else {
+                    sideForms.forEach(function (sideForm) {
+                        sideForm.classList.add('on');
+                    });
+                }
+            });
+
+            //submit logic from original code (adapted for new form structure)
+            $(document).ready(function () {
+                $("input[name=mphone]").keyup(function (event) {
+                    var inputVal = $(this).val();
+                    $(this).val(inputVal.replace(/[^0-9]/gi, ''));
+                });
+
+                $("#btnSubmitS01")
+                    .off("click.S01")
+                    .on("click.S01", function () {
+                        const frmS01Name = $("#frmS01Name").val();
+                        const phoneMHead = $(".phoneHeadSelector_m").val(); // 앞자리 선택값(010, 011 등)
+                        const phoneMNumber = $("#frmS01Mphone").val(); // 나머지 번호
+                        const frmS01Mphone = phoneMHead + phoneMNumber; // 전체 전화번호 조합
+                        const hasChecked = $("#privacyAgree3").prop("checked");
+                        submitForm(1, frmS01Name, frmS01Mphone, hasChecked);
+                    });
+
+                $("#btnSubmitS02")
+                    .off("click.S02")
+                    .on("click.S02", function () {
+                        const frmS02Name = $("#frmS02Name").val();
+                        const phoneHead = $(".phoneHeadSelector").val(); // 앞자리 선택값(010, 011 등)
+                        const phoneNumber = $("#frmS02Mphone").val(); // 나머지 번호
+                        const frmS02Mphone = phoneHead + phoneNumber; // 전체 전화번호 조합
+                        const hasChecked = $("#privacyAgree2").prop("checked");
+                        submitForm(2, frmS02Name, frmS02Mphone, hasChecked);
+                    });
+
+                $("#btnSubmitS03")
+                    .off("click.S03")
+                    .on("click.S03", function () {
+                        const frmS03Name = $("#frmS03Name").val();
+                        const frmS03Mphone = $("#frmS03Mphone").val();
+
+                        const hasChecked = $("#agree_chk").prop("checked");
+                        submitForm(3, frmS03Name, frmS03Mphone, hasChecked);
+                    });
+
+                //팝업 열고닫기
+                $(".btnViewPolicy, .showPolicyWin").on("click", function () {
+                    $("#privacyPopup").show();
+                });
+                $("#privacyPopup .btnClosePopup, #privacyPopup .btnConfirm").on("click", function () {
+                    $("#privacyPopup").hide();
+                });
+            });
+
+            const paramReferer = '';
+            const paramCampUid = '';
+            const paramUtmMedium = '';
+
+            //기본 데이터 로드
+            function loadData() {
+                const async = $.Deferred();
+                $.ajax({
+                    url: 'https://db.siwoomarketing.com/api/index.php?ctrl=landing.info',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {land_uid: "9"}, // Placeholder land_uid
+                    success: function (data) {
+                        async.resolve(data);
+                    },
+                    error: function (err) {
+                        async.reject(err);
+                    },
+                });
+
+                return async.promise();
+            }
+
+            async function submitForm(formType = 1, userName, userPhone, isChecked = false) {
+                let loadInitData;
+                let param = {};
+
+                let sms_title;
+                let sms_msg;
+                let sms_broadcast;
+                let sms_use_customer;
+                let sms_use_broadcast;
+                let user_id;
+                let land_uid;
+                try {
+                    loadInitData = await loadData();
+                    sms_title = loadInitData["extra"]["config"]["sms_title"];
+                    sms_msg = loadInitData["extra"]["config"]["sms_msg"];
+                    sms_broadcast = loadInitData["extra"]["config"]["sms_broadcast"];
+                    sms_use_customer = loadInitData["extra"]["config"]["sms_use_customer"];
+                    sms_use_broadcast = loadInitData["extra"]["config"]["sms_use_broadcast"];
+                    user_id = loadInitData["extra"]["config"]["user_id"];
+                    land_uid = loadInitData["extra"]["config"]["land_uid"];
+                } catch (e) {
+                    console.log(e);
+                    alert("폼 제출에 실패했습니다. 잠시 후 다시 시도해주세요.");
+                    return;
+                }
+
+                if (!isChecked) {
+                    alert("약관 동의 후 가능합니다.");
+                    const myModal = new bootstrap.Modal(document.getElementById('privacyPopup'));
+                    myModal.show();
+                    return;
+                }
+
+                // 이벤트 SMS 수신 동의 처리
+                let eventSmsFlag = $("#privacyPopup .agreeChk3").prop("checked") ? "Y" : "N";
+                $("input[name=rcv_event_sms]").val(eventSmsFlag);
+
+                // 폼 데이터 직렬
+                let resultData;
+
+                // 성공 처리 방식 설정
+                let successAction = {
+                    url: "/success/complete.php",
+                    showAlert: formType > 0, // 폼2,3만 알림 표시
+                    reload: formType > 0     // 폼2,3만 새로고침
+                };
+
+                param["inqType"] = 2;
+                param["smsTitle"] = sms_title;
+                param["smsMsg"] = sms_msg;
+                param["msgType"] = "mms";
+                param["smsBroadcastNumber"] = sms_broadcast;
+                param["smsSendYN"] = sms_use_customer;
+                param["smsSendBroadcastYN"] = sms_use_broadcast;
+                param["user_id"] = user_id;
+                param["land_uid"] = land_uid;
+
+                //TODO 이벤트 태그
+                param["rcv_event_sms"] = "Y";
+                param["content"] = "";
+                param["returnUrl"] = "";
+                param["refererUrl"] = paramReferer;
+                param["campUid"] = paramCampUid;
+                param["utmMedium"] = paramUtmMedium;
+                param["showCompleteAlertMsg"] = "Y";
+                param["name"] = userName;
+                param["mphone"] = userPhone;
+
+                try {
+                    resultData = await submitFormProc(param);
+                    if (resultData["returnCode"]) {
+                        if (successAction.showAlert) {
+                            alert("신청이 완료되었습니다.");
+                        }
+                        if (successAction.reload) {
+                            document.location.reload();
+                        } else {
+                            document.location.href = successAction.url;
+                        }
+                    } else {
+                        alert(resultData["returnMsg"]);
+                    }
+                } catch (e) {
+                    alert("서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.");
+                    return;
+                }
+
+                return false;
+            }
+
+            function submitFormProc(param) {
+                const async = $.Deferred();
+                // AJAX 요청
+                $.ajax({
+                    url: "https://db.siwoomarketing.com/api/index.php?ctrl=inq.regist",
+                    type: "post",
+                    dataType: "json",
+                    data: param
+                    , success: function (data) {
+                        async.resolve(data);
+                    },
+                    error: function (err) {
+                        async.reject(err);
+                    }
+                });
+                return async.promise();
+            }
+
+            // Real-time list rolling function (if needed) - keep placeholder if original code has it, but focus on content now.
+            function rollRealTimeList() {
+                // Placeholder for real-time list rolling logic
+            }
+        </script>
+      
